@@ -3,7 +3,7 @@ export const INVOTASTIC_HOST = IS_LOCALHOST ? 'fanciful-boba-39ffd8.netlify.app'
 const authCallbackTenantDomain = IS_LOCALHOST ? '' : '{tenant_domain}.';
 
 export const APPLICATION_LOGIN_URL = `https://${process.env.APPLICATION_DOMAIN}/login`;
-export const AUTH_CALLBACK_URL = `http://${authCallbackTenantDomain}${INVOTASTIC_HOST}/api/auth/callback`;
+export const AUTH_CALLBACK_URL = `https://${authCallbackTenantDomain}${INVOTASTIC_HOST}/api/auth/callback`;
 export const LOGIN_STATE_COOKIE_PREFIX = 'login:';
 export const SESSION_COOKIE_NAME = 'sid';
 

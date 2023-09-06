@@ -44,7 +44,7 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
   const { codeVerifier, returnUrl, state: cookieState, tenantDomainName } = unsealedLoginStateData;
   // Tenant domain is only used for vanity domain URL format
   const tenantDomain = IS_LOCALHOST ? '' : `${tenantDomainName}.`;
-  const tenantLoginUrl = `http://${tenantDomain}${INVOTASTIC_HOST}/api/auth/login`;
+  const tenantLoginUrl = `https://${tenantDomain}${INVOTASTIC_HOST}/api/auth/login`;
 
   // Safety check
   if (state !== cookieState) {
@@ -86,5 +86,5 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
   await req.session.save();
 
   // Send the user back to the Invotastic application.
-  res.redirect(returnUrl || `http://${tenantDomain}${INVOTASTIC_HOST}`);
+  res.redirect(returnUrl || `https://${tenantDomain}${INVOTASTIC_HOST}`);
 }

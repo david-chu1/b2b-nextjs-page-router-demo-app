@@ -22,9 +22,9 @@ export async function middleware(req: NextRequest) {
     if (!isAuthenticated) {
       // For browser-side React calls to API routes, React should handle a 401 response by redirecting
       // to the login page. For SSR pages, the redirect needs to happen directly here in the server.
-      const returnUrl = `http://${headers.get('host')}${pathname}`;
+      const returnUrl = `https://${headers.get('host')}${pathname}`;
       return isSsrPage
-        ? NextResponse.redirect(`http://${headers.get('host')}/api/auth/login?return_url=${returnUrl}`)
+        ? NextResponse.redirect(`https://${headers.get('host')}/api/auth/login?return_url=${returnUrl}`)
         : NextResponse.json({ statusText: 'Unauthorized' }, { status: 401 });
     }
 
@@ -59,9 +59,9 @@ export async function middleware(req: NextRequest) {
       return res;
     } catch (error) {
       console.log(`Token refresh failed: `, error);
-      const returnUrl = `http://${headers.get('host')}${pathname}`;
+      const returnUrl = `https://${headers.get('host')}${pathname}`;
       return isSsrPage
-        ? NextResponse.redirect(`http://${headers.get('host')}/api/auth/login?return_url=${returnUrl}`)
+        ? NextResponse.redirect(`https://${headers.get('host')}/api/auth/login?return_url=${returnUrl}`)
         : NextResponse.json({ statusText: 'Unauthorized' }, { status: 401 });
     }
   }

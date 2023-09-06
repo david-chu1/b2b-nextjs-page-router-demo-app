@@ -44,5 +44,5 @@ async function logoutRoute(req: NextApiRequest, res: NextApiResponse) {
   /* WRISTBAND_TOUCHPOINT - AUTHENTICATION */
   // Always perform logout redirect to the Wristband logout endpoint.
   const hostname = `${tenantDomainName}-${process.env.APPLICATION_DOMAIN}`;
-  res.redirect(`http://${hostname}/api/v1/logout?client_id=${process.env.CLIENT_ID}`);
+  res.redirect(`https://${hostname}/api/v1/logout?client_id=${process.env.CLIENT_ID}`);
 }
