@@ -16,7 +16,9 @@ export async function middleware(req: NextRequest) {
   if (pathname.startsWith('/api/v1') || isSsrPage) {
     const session = await getSessionMiddleware(req, res);
     const { accessToken, expiresAt, refreshToken } = session;
-    console.log("!!!!!! " + accessToken, expiresAt, refreshToken);
+    console.log("!!!!!! Request: " + req);
+    console.log("!!!!!! Session values: " + accessToken, expiresAt, refreshToken);
+    console.log(process.env.SESSION_COOKIE_SECRET);
 
     // First check that we have our token data in our session.
     const isAuthenticated = !!accessToken && !!expiresAt && !!refreshToken;
