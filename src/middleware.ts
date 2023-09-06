@@ -15,8 +15,9 @@ export async function middleware(req: NextRequest) {
   // Path matching here is crude -- replace with whatever matching algorithm your app needs.
   if (pathname.startsWith('/api/v1') || isSsrPage) {
     const session = await getSessionMiddleware(req, res);
+    console.log("!!!!!! Session: " + JSON.stringify(session));
     const { accessToken, expiresAt, refreshToken } = session;
-    console.log("!!!!!! Request: " + req);
+    console.log("!!!!!! Request: " + JSON.stringify(req));
     console.log("!!!!!! Session values: " + accessToken, expiresAt, refreshToken);
     console.log(process.env.SESSION_COOKIE_SECRET);
 
