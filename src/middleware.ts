@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { MiddlewareRequest, type NextRequest as NetlifyNextRequest } from "@netlify/next";
+
 import retry from 'async-retry';
 
 import * as wristbandService from '@/services/wristband-service';
@@ -10,14 +12,16 @@ export async function middleware(req: NextRequest) {
   const { pathname } = nextUrl;
   // The boolean logic here should change depending on your SSR page convention.
   const isSsrPage: boolean = pathname === '/settings';
+
+  const request = new MiddlewareRequest(req as NetlifyNextRequest);
  
   // This determines which routes in your app are protected by tokens and have session access.
   // Path matching here is crude -- replace with whatever matching algorithm your app needs.
   if (pathname.startsWith('/api/v1') || isSsrPage) {
-    const session = await getSessionMiddleware(req, res);
+    const session = await getSessionMiddleware(request, res);
     console.log("!!!!!! Session: " + JSON.stringify(session));
     const { accessToken, expiresAt, refreshToken } = session;
-    console.log("!!!!!! Request: " + JSON.stringify(req));
+    console.log("!!!!!! Request: " + JSON.stringify(request));
     console.log("!!!!!! Session values: " + accessToken, expiresAt, refreshToken);
     console.log(process.env.SESSION_COOKIE_SECRET);
 
